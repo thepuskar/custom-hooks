@@ -5,7 +5,7 @@ import './App.css'
 function App() {
   return (
     <div className='App'>
-      <SayHello name='Prateek' />
+      <SayHello name='Puskar' />
     </div>
   )
 }
