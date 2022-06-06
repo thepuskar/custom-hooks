@@ -10,8 +10,6 @@
 
 # production
 /build
-/example/node_modules
-/example/build
 
 # misc
 .DS_Store
@@ -19,21 +17,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
-.env.development
-
-
-
-.prettierignore
-.prettierrc
-./package-lock.json
-yarn.lock
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-*.ai
-*.xd
-
-
-
-package-lock.json
