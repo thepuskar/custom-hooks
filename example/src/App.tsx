@@ -1,11 +1,19 @@
-import React from 'react'
-import SayHello from 'react-custome-hooks'
+import React, { useState, useEffect } from 'react'
+import { useLocalStorage } from 'react-custome-hooks'
 import './App.css'
 
 function App() {
+  const [name, setName] = useLocalStorage('name', 'Puskar')
+  console.log(name)
+
   return (
     <div className='App'>
-      <SayHello name='Puskar' />
+      Hello World
+      <input
+        type='text'
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
     </div>
   )
 }
