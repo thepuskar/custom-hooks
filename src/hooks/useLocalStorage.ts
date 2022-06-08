@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 
 /**
  * It returns an array with two elements: the first element is the value of the local storage item, and
@@ -12,7 +12,7 @@ export const useLocalStorage = (
   keyName: string,
   defaultValue: string | Object | Array<String | Object>
 ) => {
-  const [storedValue, setStoredValue] = React.useState(() => {
+  const [storedValue, setStoredValue] = useState(() => {
     try {
       const value = window.localStorage.getItem(keyName)
       return value ? JSON.parse(value) : defaultValue
