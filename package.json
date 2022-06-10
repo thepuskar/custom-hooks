@@ -1,6 +1,6 @@
 {
-  "name": "react-custome-hooks",
-  "version": "1.0.1",
+  "name": "custom-hook",
+  "version": "1.0.0",
   "description": "react custome hooks collection",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
