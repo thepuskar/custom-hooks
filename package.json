@@ -1,5 +1,5 @@
 {
-  "name": "react-custome-hooks",
+  "name": "custom-hook",
   "version": "1.0.0",
   "description": "react custome hooks collection",
   "main": "./lib/cjs/index.js",
@@ -17,12 +17,10 @@
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0",
     "typescript": "^4.7.3"
   },
   "peerDependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react": "^18.1.0"
   },
   "files": [
     "/lib"
