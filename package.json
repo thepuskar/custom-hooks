@@ -1,7 +1,7 @@
 {
-  "name": "custom-hook",
+  "name": "@thpuskar/react-hooks",
   "version": "1.0.0",
-  "description": "react custome hooks collection",
+  "description": "react custom hooks collection",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
