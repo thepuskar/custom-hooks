@@ -12,8 +12,7 @@
 /build
 /example/node_modules
 /example/build
-/lib
-/example
+
 
 # misc
 .DS_Store
