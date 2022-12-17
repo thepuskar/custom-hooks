@@ -1,4 +1,4 @@
-import { useRef, RefObject, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 
 type Options = Pick<AddEventListenerOptions, 'capture' | 'passive' | 'once'>
 
@@ -15,14 +15,14 @@ function useEventListener<K extends keyof HTMLElementEventMap>(
   eventName: K,
   handler: HTMLElementEventMap[K],
   //allow null to support usage with `useRef<HTMLElement | null>`(null)
-  element: RefObject<HTMLElement | null>,
+  element: HTMLElement | null,
   options?: Options
 ): void
 
 function useEventListener<K extends keyof DocumentEventMap>(
   eventName: K,
   handler: DocumentEventMap[K],
-  element: RefObject<Document>,
+  element: Document,
   options?: Options
 ): void
 
