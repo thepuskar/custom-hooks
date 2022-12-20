@@ -1,5 +1,6 @@
 import { RefObject } from 'react'
 import { useGetLatest, useIsomorphicEffect } from '../index'
+import { onEvent, offEvent } from '../../utils'
 
 type ElementEventListener<K extends keyof HTMLElementEventMap> = (
   this: HTMLElement,
@@ -109,11 +110,11 @@ export const useEventListener: UseEventListener = (
       else thirdParam = cachedOptions.current?.capture
     }
 
-    shouldAttach && element.addEventListener(eventType, listener, thirdParam)
+    shouldAttach && onEvent(element, eventType, listener, thirdParam)
 
     return () => {
       unsubscribed = true
-      element.removeEventListener(eventType, listener, thirdParam)
+      offEvent(element, eventType, listener, thirdParam)
     }
   }, [target, eventType, shouldAttach])
 }
