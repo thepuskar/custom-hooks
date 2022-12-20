@@ -1,4 +1,5 @@
-import { RefObject, useEffect, useState } from 'react'
+import { RefObject, useState } from 'react'
+import { useIsomorphicEffect } from './index'
 
 const DEFAULT_ROOT_MARGIN = '0px'
 const DEFAULT_THRESHOLD = [0]
@@ -69,7 +70,7 @@ export function useIntersectionObserver({
     setEntry(entry)
   }
 
-  useEffect(() => {
+  useIsomorphicEffect(() => {
     const node = ref?.current
     const hasIOSupport = !!window.IntersectionObserver
 

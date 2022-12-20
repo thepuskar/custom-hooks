@@ -1,10 +1,10 @@
 import { useGetLatest } from './useGetLatest'
-import * as React from 'react'
+import { useIsomorphicEffect } from '../index'
 
 export const useAttachDomClick = (callback: any) => {
   const cachedCallback = useGetLatest(callback)
 
-  React.useEffect(() => {
+  useIsomorphicEffect(() => {
     document.addEventListener('click', cachedCallback.current)
     return () => {
       document.removeEventListener('click', cachedCallback.current)
