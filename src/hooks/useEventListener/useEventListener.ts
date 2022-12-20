@@ -1,5 +1,5 @@
-import { RefObject, useEffect } from 'react'
-import { useGetLatest } from '../index'
+import { RefObject } from 'react'
+import { useGetLatest, useIsomorphicEffect } from '../index'
 
 type ElementEventListener<K extends keyof HTMLElementEventMap> = (
   this: HTMLElement,
@@ -91,7 +91,7 @@ export const useEventListener: UseEventListener = (
   const cachedOptions = useGetLatest(options)
   const cachedHandler = useGetLatest(handler)
 
-  useEffect(() => {
+  useIsomorphicEffect(() => {
     const element = target && 'current' in target ? target.current : target
 
     if (!element) return

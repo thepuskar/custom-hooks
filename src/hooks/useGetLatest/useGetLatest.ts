@@ -1,4 +1,5 @@
-import { useEffect, useRef, MutableRefObject } from 'react'
+import { useRef, MutableRefObject } from 'react'
+import { useIsomorphicEffect } from '../index'
 
 /**
  * It is a React hook that stores & updates ref.current with the most recent value.
@@ -8,7 +9,7 @@ import { useEffect, useRef, MutableRefObject } from 'react'
 export const useGetLatest = <T>(value: T): MutableRefObject<T> => {
   const ref = useRef<T>(value)
 
-  useEffect(() => {
+  useIsomorphicEffect(() => {
     void (ref.current = value)
   })
   return ref
