@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-
+import { useState } from 'react'
+import { useIsomorphicEffect } from './index'
 /**
  * It returns the current scroll position of the window.
  * @returns The scroll position of the window.
@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 export const useGetScrollPosition = (initialPosition?: Number) => {
   const [scrollPosition, setScrollPosition] = useState(initialPosition ?? 0)
 
-  useEffect(() => {
+  useIsomorphicEffect(() => {
     const updatePosition = () => {
       setScrollPosition(window.pageYOffset)
     }
