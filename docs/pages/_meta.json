@@ -1,0 +1,15 @@
+{
+  "index": "Introduction",
+  "useIntersectionObserver": "useIntersectionObserver",
+  "advanced": "Advanced (A Folder)",
+  "about": {
+    "title": "About",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Contact ↗",
+    "type": "page",
+    "href": "https://twitter.com/the_puskar",
+    "newWindow": true
+  }
+}
