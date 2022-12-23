@@ -22,15 +22,17 @@ export const SideBar = (props: ISidebarProps) => {
   }
   useOnClickOutside(ref, closeHander)
 
+  const mobSidebarClass = (): string => {
+    if (width > 768) return ''
+    return props?.isActive
+      ? 'md:transform-none left-0'
+      : 'md:transform-none -left-full'
+  }
   return (
     <>
       <div
         id='drawer-example'
-        className={` fixed overflow-y-auto bg-[rgba(0,0,0,0.35)] md:w-72 w-full ease-in-out duration-300 origin-left transition-all ${
-          props?.isActive
-            ? 'md:transform-none left-0'
-            : 'md:transform-none -left-full'
-        }`}
+        className={` fixed overflow-y-auto bg-[rgba(0,0,0,0.35)] md:w-72 w-full ease-in-out duration-300 origin-left transition-all ${mobSidebarClass()}`}
         aria-labelledby='drawer-label'
       >
         <div

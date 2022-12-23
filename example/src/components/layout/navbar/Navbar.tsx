@@ -10,7 +10,7 @@ export const Navbar = ({ toggleSidebar }: INavbarProps) => {
       <div className='container flex flex-wrap items-center justify-between mx-auto'>
         <Link to='/' className='flex items-center p-2'>
           <span className='self-center text-xl font-semibold whitespace-nowrap dark:text-white'>
-            react-hooks
+            @thepuskar/custom-hooks
           </span>
         </Link>
         <div className='flex md:order-2'>
