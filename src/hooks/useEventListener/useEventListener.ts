@@ -1,72 +1,120 @@
-import { useRef, useEffect } from 'react'
+import { RefObject } from 'react'
+import { useGetLatest, useIsomorphicEffect } from '../index'
+import { onEvent, offEvent } from '../../utils'
 
-type Options = Pick<AddEventListenerOptions, 'capture' | 'passive' | 'once'>
+type ElementEventListener<K extends keyof HTMLElementEventMap> = (
+  this: HTMLElement,
+  event: HTMLElementEventMap[K]
+) => void
 
-/**
- * It adds an event listener to an element and returns a cleanup function that removes the event
- * listener when the component unmounts
- * @param {K} eventName - The name of the event you want to listen to.
- * @param handler - The event handler function.
- * @param {HTMLElement | Document | Window | null} [element] - The element to listen to events on.
- * @param {Options} [options] - An optional parameter that is an object that specifies characteristics
- * about the event listener.
- */
-function useEventListener<K extends keyof HTMLElementEventMap>(
-  eventName: K,
-  handler: HTMLElementEventMap[K],
-  //allow null to support usage with `useRef<HTMLElement | null>`(null)
-  element: HTMLElement | null,
-  options?: Options
-): void
+type DocumentEventListener<K extends keyof DocumentEventMap> = (
+  this: Document,
+  event: DocumentEventMap[K]
+) => void
 
-function useEventListener<K extends keyof DocumentEventMap>(
-  eventName: K,
-  handler: DocumentEventMap[K],
-  element: Document,
-  options?: Options
-): void
+type WindowEventListener<K extends keyof WindowEventMap> = (
+  this: Window,
+  event: WindowEventMap[K]
+) => void
 
-function useEventListener<K extends keyof WindowEventMap>(
-  eventName: K,
-  handler: WindowEventMap[K],
-  element: undefined,
-  options?: Options
-): void
+type Options = boolean | AddEventListenerOptions
 
-function useEventListener(
-  eventName: string,
-  handler: EventListenerOrEventListenerObject,
-  element?: HTMLElement | Window | Document | null,
-  options?: Options
-): void
-
-function useEventListener<
-  K extends keyof (HTMLElementEventMap & DocumentEventMap & WindowEventMap)
->(
-  eventName: K,
-  handler: (
-    event: (HTMLElementEventMap & DocumentEventMap & WindowEventMap)[K]
-  ) => void,
-  element?: HTMLElement | Document | Window | null,
-  options?: Options
-) {
-  const saveHandler = useRef(handler)
-
-  useEffect(() => {
-    saveHandler.current = handler
-  }, [handler])
-
-  useEffect(() => {
-    const isSupported = element && element.addEventListener
-    if (!isSupported) return
-
-    const eventListener: typeof handler = (event) => saveHandler.current(event)
-
-    element.addEventListener(eventName, eventListener, options)
-    return () => {
-      element.removeEventListener(eventName, eventListener, options)
-    }
-  }, [eventName, element, options])
+type UseEventListener = {
+  <K extends keyof HTMLElementEventMap, T extends HTMLElement = HTMLElement>(
+    config: {
+      target: RefObject<T> | T | null
+      eventType: K
+      handler: ElementEventListener<K>
+      options?: Options
+    },
+    shouldAttach?: boolean
+  ): void
+  <K extends keyof DocumentEventMap, T extends Document = Document>(
+    config: {
+      target: T | null
+      eventType: K
+      handler: DocumentEventListener<K>
+      options?: Options
+    },
+    shouldAttach?: boolean
+  ): void
+  <K extends keyof WindowEventMap, T extends Window = Window>(
+    config: {
+      target: T | null
+      eventType: K
+      handler: WindowEventListener<K>
+      options?: Options
+    },
+    shouldAttach?: boolean
+  ): void
 }
 
-export default useEventListener
+/**
+ * It tries to define a property on an object, and if it fails, it returns false. If it succeeds, it
+ * returns true
+ */
+const isOptionParamSupported = (): boolean => {
+  let optionSupported = false
+
+  try {
+    Object.defineProperty({}, 'passive', {
+      get: () => {
+        optionSupported = true
+        return null
+      }
+    })
+  } catch (error) {
+    return false
+  }
+
+  return optionSupported
+}
+
+/**
+ * A React hook that handles binding/unbinding event listeners in a smart way.
+ *
+ * @param config.target - The target to which the listener will be attached.
+ * @param config.eventType - A case-sensitive string representing the event type to listen for.
+ * @param config.handler - event listener callback.
+ * @param shouldAttach - If set to false, the listener won't be attached. (default = true)
+ */
+export const useEventListener: UseEventListener = (
+  config: {
+    target: RefObject<HTMLElement> | HTMLElement | Window | Document | null
+    eventType: string
+    handler: unknown
+    options?: Options
+  },
+  shouldAttach = true
+): void => {
+  const { target = null, eventType, handler, options } = config
+
+  const cachedOptions = useGetLatest(options)
+  const cachedHandler = useGetLatest(handler)
+
+  useIsomorphicEffect(() => {
+    const element = target && 'current' in target ? target.current : target
+
+    if (!element) return
+
+    let unsubscribed = false
+    const listener = (event: Event) => {
+      if (unsubscribed) return
+      ;(cachedHandler.current as (ev: Event) => void)(event)
+    }
+
+    let thirdParam = cachedOptions.current
+
+    if (typeof cachedOptions.current !== 'boolean') {
+      if (isOptionParamSupported()) thirdParam = cachedOptions.current
+      else thirdParam = cachedOptions.current?.capture
+    }
+
+    shouldAttach && onEvent(element, eventType, listener, thirdParam)
+
+    return () => {
+      unsubscribed = true
+      offEvent(element, eventType, listener, thirdParam)
+    }
+  }, [target, eventType, shouldAttach])
+}
