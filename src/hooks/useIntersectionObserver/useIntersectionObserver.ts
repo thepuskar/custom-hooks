@@ -1,5 +1,5 @@
 import { RefObject, useState } from 'react'
-import { useIsomorphicEffect } from './index'
+import { useIsomorphicEffect } from '../index'
 
 const DEFAULT_ROOT_MARGIN = '0px'
 const DEFAULT_THRESHOLD = [0]
