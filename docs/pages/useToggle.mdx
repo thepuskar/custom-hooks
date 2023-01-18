@@ -1,16 +1,16 @@
 # useToggle
 
-The useIntersectionObserver is a custom hook in React that allows you to detect when an element is in the viewport of a user's browser. It takes in an object with a ref property and an optional options property. The ref property is a reference object to an element in the DOM, and the options property is an object with configuration options for the intersection observer instance.
+This hook allows you to manage toggle state in a functional component. It returns an array containing the current state of the toggle, a callback function to toggle the state and a callback function to set the state directly.
 
-The hook returns an IntersectionObserverEntry object if the element is in the viewport, otherwise it returns undefined. The entry object contains information about the intersection between the element and the viewport, such as the intersection ratio and whether the element is fully or partially in the viewport.
+Parameters
 
-The hook uses the useIsomorphicEffect hook to set up an intersection observer instance on the element when the component mounts and clean it up when the component unmounts. The intersection observer instance is configured with the options passed in the options object.
+`initialValue`: The initial state of the toggle.
 
-The hook also includes a state variable entry and a state updater function updateEntry that stores the IntersectionObserverEntry object returned by the intersection observer instance and updates the component's state with it.
+Returns
 
-If the triggerOnce option is set to true, the hook will check for intersection only once and will disconnect the intersection observer instance after the intersection.
-
-The default values for the rootMargin and threshold options are '0px' and [0], respectively. The root option defaults to null.
+- `value`: The current state of the toggle (true or false).
+- `toggle`: A callback function to toggle the state of the toggle. If called with a value, the toggle will be set to that value. If called without a value, the toggle will be flipped (true to false, or false to true).
+- `setValue`: A callback function to set the state of the toggle directly.
 
 ## The Hook
 
