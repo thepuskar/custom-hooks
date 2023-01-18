@@ -1,7 +1,7 @@
 {
   "index": "Introduction",
   "useIntersectionObserver": "useIntersectionObserver",
-  "advanced": "Advanced (A Folder)",
+  "useToggle": "useToggle",
   "about": {
     "title": "About",
     "type": "page"
