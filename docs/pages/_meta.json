@@ -2,6 +2,7 @@
   "index": "Introduction",
   "useIntersectionObserver": "useIntersectionObserver",
   "useToggle": "useToggle",
+  "useTimeout": "useTimeout",
   "about": {
     "title": "About",
     "type": "page"
@@ -10,6 +11,12 @@
     "title": "Contact ↗",
     "type": "page",
     "href": "https://twitter.com/the_puskar",
+    "newWindow": true
+  },
+  "stackblitz": {
+    "title": "Stackblitz",
+    "type": "page",
+    "href": "https://stackblitz.com/edit/vitejs-vite-xpgdmi",
     "newWindow": true
   }
 }
