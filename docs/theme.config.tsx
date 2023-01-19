@@ -6,8 +6,7 @@ const config: DocsThemeConfig = {
   project: {
     link: 'https://github.com/thepuskar/react-hooks'
   },
-  docsRepositoryBase: 'https://github.com/thepuskar/custom-hooks-docs',
-
+  docsRepositoryBase: 'https://github.com/thepuskar/react-hooks/tree/main/docs',
   footer: {
     text: '@thepuskar/custom-hooks'
   },
