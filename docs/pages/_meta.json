@@ -4,6 +4,7 @@
   "useToggle": "useToggle",
   "useTimeout": "useTimeout",
   "useGeolocation": "useGeolocation",
+  "useDebounce": "useDebounce",
   "about": {
     "title": "About",
     "type": "page"
