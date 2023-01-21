@@ -3,6 +3,7 @@
   "useIntersectionObserver": "useIntersectionObserver",
   "useToggle": "useToggle",
   "useTimeout": "useTimeout",
+  "useGeolocation": "useGeolocation",
   "about": {
     "title": "About",
     "type": "page"
