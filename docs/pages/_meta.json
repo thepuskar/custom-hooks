@@ -5,6 +5,7 @@
   "useTimeout": "useTimeout",
   "useGeolocation": "useGeolocation",
   "useDebounce": "useDebounce",
+  "useThrottle": "useThrottle",
   "about": {
     "title": "About",
     "type": "page"
