@@ -6,6 +6,7 @@
   "useGeolocation": "useGeolocation",
   "useDebounce": "useDebounce",
   "useThrottle": "useThrottle",
+  "useArray": "useArray",
   "about": {
     "title": "About",
     "type": "page"
