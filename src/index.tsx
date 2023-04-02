@@ -1,2 +1,1 @@
-export * from './hooks'
-export * from './hooks/useLocalStorage'
+export * from "./hooks";
