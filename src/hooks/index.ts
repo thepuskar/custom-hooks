@@ -7,3 +7,4 @@ export * from "./useToggle";
 export * from "./useThrottle";
 export * from "./useArray";
 export * from "./useFetch";
+export * from "./useMounted";
