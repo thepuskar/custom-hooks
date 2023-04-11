@@ -14,9 +14,9 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "src"
   },
-  "include": ["src"],
+  "include": ["./src"],
   "exclude": ["node_modules", "lib"]
 }
