@@ -1,11 +1,13 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 
 /**
  * This function returns a boolean value indicating whether a component is currently mounted or not.
  * @returns A boolean value indicating whether the component is currently mounted or not.
  */
-export function useMounted(): boolean {
-  const isMounted = useRef(false);
+export function useMounted() {
+  const isMounted = useRef<boolean>(false);
+
+  const mouted = useCallback(() => isMounted.current, []);
 
   useEffect(() => {
     isMounted.current = true;
@@ -14,5 +16,5 @@ export function useMounted(): boolean {
     };
   }, []);
 
-  return isMounted.current;
+  return mouted;
 }
