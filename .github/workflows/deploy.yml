@@ -3,10 +3,10 @@ name: Deploy Nextra App to GitHub Pages
 on:
   push:
     branches:
-      - main # Trigger on pushes to the main branch
+      - ci-cd # Trigger on pushes to the main branch
   pull_request:
     branches:
-      - main # Trigger on PRs targeting the main branch
+      - ci-cd # Trigger on PRs targeting the main branch
 
 jobs:
   build-and-deploy:
@@ -24,13 +24,13 @@ jobs:
           node-version: "18" # Use the Node.js version that works with your project
           cache: "npm"
 
-      # Step 3: Install dependencies inside the docs directory
+      # Step 3: Install dependencies inside the 'docs' directory
       - name: Install dependencies
         run: |
           cd docs
           npm install
 
-      # Step 4: Build the project inside the docs directory
+      # Step 4: Build the project inside the 'docs' directory
       - name: Build project
         run: |
           cd docs
