@@ -15,8 +15,12 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "src"
+    "baseUrl": ".",
+    "paths": {
+      "hooks/*": ["src/hooks/*"]
+    },
+    "types": ["jest", "node"]
   },
-  "include": ["./src"],
+  "include": ["./src", "**/*.test.tsx", "**/*.test.ts"],
   "exclude": ["node_modules", "lib"]
 }
