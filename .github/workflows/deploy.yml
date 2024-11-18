@@ -3,49 +3,41 @@ name: Deploy Nextra App to GitHub Pages
 on:
   push:
     branches:
-      - ci-cd # Trigger on pushes to the main branch
+      - ci-cd
   pull_request:
     branches:
-      - ci-cd # Trigger on PRs targeting the main branch
+      - ci-cd
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18" # Use the Node.js version that works with your project
-          cache: "npm"
+          node-version: 18
+          cache: npm
+          cache-dependency-path: docs/package-lock.json
 
-      # Step 3: Install dependencies inside the 'docs' directory
       - name: Install dependencies
-        run: |
-          cd docs
-          npm install
+        working-directory: docs
+        run: npm ci
 
-      # Step 4: Build the project inside the 'docs' directory
       - name: Build project
-        run: |
-          cd docs
-          npm run build
+        working-directory: docs
+        run: npm run build
 
-      # Step 5: Export the project to static files
       - name: Export to static files
-        run: |
-          cd docs
-          npm run export
+        working-directory: docs
+        run: npm run export
 
-      # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/out # The export output will be in docs/out
-          publish_branch: gh-pages # The branch to deploy to, typically 'gh-pages'
+          publish_dir: ./docs/out
+          publish_branch: gh-pages
