@@ -9,6 +9,7 @@
   "useArray": "useArray",
   "useFetch": "useFetch",
   "useOnScreen": "useOnScreen",
+  "useClickOutside": "useClickOutside",
   "about": {
     "title": "About",
     "type": "page"
