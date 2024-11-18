@@ -16,22 +16,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: pnpm
 
       - name: Install dependencies
         working-directory: docs
-        run: npm install
+        run: pnpm install
 
       - name: Build project
         working-directory: docs
-        run: npm run build
-
-      - name: Export to static files
-        working-directory: docs
-        run: npm run export
+        run: pnpm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
