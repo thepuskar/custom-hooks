@@ -10,6 +10,7 @@
   "useFetch": "useFetch",
   "useOnScreen": "useOnScreen",
   "useClickOutside": "useClickOutside",
+  "useCopyToClipboard": "useCopyToClipboard",
   "about": {
     "title": "About",
     "type": "page"
