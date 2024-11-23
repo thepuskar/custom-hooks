@@ -9,3 +9,4 @@ export * from "./useMounted";
 export * from "./useOnScreen";
 export * from "./useThrottle";
 export * from "./useToggle";
+export * from "./useCopyToClipboard";
